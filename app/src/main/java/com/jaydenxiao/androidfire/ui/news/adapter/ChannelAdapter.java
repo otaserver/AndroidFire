@@ -1,7 +1,7 @@
 package com.jaydenxiao.androidfire.ui.news.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 

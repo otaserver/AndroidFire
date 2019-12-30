@@ -4,13 +4,13 @@ def releaseTime() {
 }
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "jaydenxiao.com.androidfire"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion 19
+        targetSdkVersion 29
         versionCode 4
         versionName "1.0.3"
     }
@@ -24,7 +24,7 @@ android {
             // 移除无用的resource文件
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            //apk命名
+            // apk命名 FIXME 此处报错，待修改
 //            android.applicationVariants.all { variant ->
 //                variant.outputs.each { output ->
 //                    def outputFile = output.outputFile
@@ -53,6 +53,12 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -64,5 +70,6 @@ dependencies {
     compile project(':library:jcvideoplayer')//视频播放
     compile project(':library:selectordialog')//常用提示框
 
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    // Butterknife requires annotationProcessor
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }
