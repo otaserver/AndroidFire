@@ -1,8 +1,11 @@
 package com.jaydenxiao.androidfire.ui.news.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.androidfire.app.AppConstant;
 import com.jaydenxiao.common.base.BaseFragment;
@@ -14,8 +17,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import rx.Observable;
 import rx.Subscriber;
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * des:图文新闻详情
@@ -71,9 +72,9 @@ public class PhotoDetailFragment extends BaseFragment {
     }
 
     private void setPhotoViewClickEvent() {
-        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+        photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
-            public void onPhotoTap(View view, float v, float v1) {
+            public void onPhotoTap(ImageView view, float x, float y) {
                 mRxManager.post(AppConstant.PHOTO_TAB_CLICK,"");
             }
         });
