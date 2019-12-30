@@ -25,7 +25,7 @@ import com.yuyh.library.imgsel.ImgSelConfig;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -34,11 +34,11 @@ import butterknife.OnClick;
  * on 2016.09.11:49
  */
 public class CirclePublishActivity extends BaseActivity implements View.OnClickListener {
-    @Bind(R.id.ntb)
+    @BindView(R.id.ntb)
     NormalTitleBar ntb;
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     EditText etContent;
-    @Bind(R.id.gridview)
+    @BindView(R.id.gridview)
     NoScrollGridView gridview;
     private NinePicturesAdapter ninePicturesAdapter;
     private int REQUEST_CODE=120;

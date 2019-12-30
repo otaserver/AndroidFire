@@ -25,7 +25,8 @@ import com.jaydenxiao.common.commonwidget.NormalTitleBar;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+
 
 /**
  * des:图片首页
@@ -33,13 +34,13 @@ import butterknife.Bind;
  * on 2016.09.11:49
  */
 public class PhotosMainFragment extends BaseFragment<PhotosListPresenter,PhotosListModel> implements PhotoListContract.View ,OnRefreshListener,OnLoadMoreListener{
-    @Bind(R.id.ntb)
+    @BindView(R.id.ntb)
     NormalTitleBar ntb;
-    @Bind(R.id.irc)
+    @BindView(R.id.irc)
     IRecyclerView irc;
-    @Bind(R.id.loadedTip)
+    @BindView(R.id.loadedTip)
     LoadingTip loadedTip;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     FloatingActionButton fab;
     private CommonRecycleViewAdapter<PhotoGirl>adapter;
     private static int SIZE = 20;

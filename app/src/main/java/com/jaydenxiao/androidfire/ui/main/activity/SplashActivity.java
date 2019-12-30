@@ -11,7 +11,8 @@ import android.widget.TextView;
 import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.common.base.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
+
 
 /**
  * des:启动页
@@ -19,9 +20,9 @@ import butterknife.Bind;
  * on 2016.09.15:16
  */
 public class SplashActivity extends BaseActivity {
-    @Bind(R.id.iv_logo)
+    @BindView(R.id.iv_logo)
     ImageView ivLogo;
-    @Bind(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView tvName;
 
     @Override

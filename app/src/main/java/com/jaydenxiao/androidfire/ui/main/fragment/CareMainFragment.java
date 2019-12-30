@@ -13,7 +13,7 @@ import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
 import com.jaydenxiao.common.commonwidget.WaveView;
 import com.jaydenxiao.common.daynightmodeutils.ChangeModeController;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -22,11 +22,11 @@ import butterknife.OnClick;
  * on 2016.09.17:07
  */
 public class CareMainFragment extends BaseFragment {
-    @Bind(R.id.ll_friend_zone)
+    @BindView(R.id.ll_friend_zone)
     LinearLayout llFriendZone;
-    @Bind(R.id.wave_view)
+    @BindView(R.id.wave_view)
     WaveView waveView;
-    @Bind(R.id.img_logo)
+    @BindView(R.id.img_logo)
     ImageView imgLogo;
 
     @Override

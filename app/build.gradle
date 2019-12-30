@@ -4,13 +4,13 @@ def releaseTime() {
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "jaydenxiao.com.androidfire"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 28
         versionCode 4
         versionName "1.0.3"
     }
@@ -25,16 +25,16 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //apk命名
-            android.applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        //这里修改apk文件名
-                        def fileName = "AndroidFire-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}.apk"
-                        output.outputFile = new File(outputFile.parent, fileName)
-                    }
-                }
-            }
+//            android.applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        //这里修改apk文件名
+//                        def fileName = "AndroidFire-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
         }
         debug{
             buildConfigField "boolean", "LOG_DEBUG", "true"
@@ -64,5 +64,5 @@ dependencies {
     compile project(':library:jcvideoplayer')//视频播放
     compile project(':library:selectordialog')//常用提示框
 
-
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

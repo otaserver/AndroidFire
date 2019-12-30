@@ -27,7 +27,7 @@ import com.jaydenxiao.common.daynightmodeutils.ChangeModeController;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.hugeterry.updatefun.UpdateFunGO;
 import cn.hugeterry.updatefun.config.UpdateKey;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -39,7 +39,7 @@ import rx.functions.Action1;
  * on 2016.09.15:32
  */
 public class MainActivity extends BaseActivity {
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     CommonTabLayout tabLayout;
 
     private String[] mTitles = {"首页", "美女","视频","关注"};

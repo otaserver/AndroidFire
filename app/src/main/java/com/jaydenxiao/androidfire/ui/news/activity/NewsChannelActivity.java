@@ -26,7 +26,7 @@ import com.jaydenxiao.common.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.functions.Action1;
 
 /**
@@ -35,11 +35,11 @@ import rx.functions.Action1;
  * on 2016.09.11:51
  */
 public class NewsChannelActivity extends BaseActivity<NewsChanelPresenter, NewsChannelModel>implements NewsChannelContract.View{
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.news_channel_mine_rv)
+    @BindView(R.id.news_channel_mine_rv)
     RecyclerView newsChannelMineRv;
-    @Bind(R.id.news_channel_more_rv)
+    @BindView(R.id.news_channel_more_rv)
     RecyclerView newsChannelMoreRv;
 
     private ChannelAdapter channelAdapterMine;

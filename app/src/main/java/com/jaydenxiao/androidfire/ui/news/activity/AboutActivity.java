@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.common.base.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 import static com.jaydenxiao.androidfire.R.layout.act_about;
 
@@ -26,21 +26,21 @@ import static com.jaydenxiao.androidfire.R.layout.act_about;
 public class AboutActivity extends BaseActivity {
 
 
-    @Bind(R.id.news_detail_photo_iv)
+    @BindView(R.id.news_detail_photo_iv)
     ImageView newsDetailPhotoIv;
-    @Bind(R.id.mask_view)
+    @BindView(R.id.mask_view)
     View maskView;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.toolbar_layout)
+    @BindView(R.id.toolbar_layout)
     CollapsingToolbarLayout toolbarLayout;
-    @Bind(R.id.app_bar)
+    @BindView(R.id.app_bar)
     AppBarLayout appBar;
-    @Bind(R.id.news_detail_from_tv)
+    @BindView(R.id.news_detail_from_tv)
     TextView newsDetailFromTv;
-    @Bind(R.id.tv_code_des)
+    @BindView(R.id.tv_code_des)
     TextView tvCodeDes;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     FloatingActionButton fab;
     private String mShareLink;
 

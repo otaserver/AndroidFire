@@ -11,7 +11,7 @@ import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Subscriber;
 import uk.co.senab.photoview.PhotoView;
@@ -23,9 +23,9 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * on 2016.09.9:57
  */
 public class PhotoDetailFragment extends BaseFragment {
-    @Bind(R.id.photo_view)
+    @BindView(R.id.photo_view)
     PhotoView photoView;
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     private String mImgSrc;
 

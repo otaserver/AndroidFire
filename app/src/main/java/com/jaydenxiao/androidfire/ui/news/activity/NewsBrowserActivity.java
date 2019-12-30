@@ -16,16 +16,17 @@ import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.androidfire.app.AppConstant;
 import com.jaydenxiao.common.base.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
+
 
 public class NewsBrowserActivity extends BaseActivity {
 
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar progressBar;
-    @Bind(R.id.web_view)
+    @BindView(R.id.web_view)
     WebView webView;
 
     public static void startAction(Context context ,String link,String title){

@@ -21,7 +21,8 @@ import com.jaydenxiao.common.commonwidget.LoadingTip;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+
 
 /**
  * des:新闻fragment
@@ -29,9 +30,9 @@ import butterknife.Bind;
  * on 2016.09.17:30
  */
 public class NewsFrament extends BaseFragment<NewsListPresenter, NewsListModel> implements NewsListContract.View, OnRefreshListener, OnLoadMoreListener {
-    @Bind(R.id.irc)
+    @BindView(R.id.irc)
     IRecyclerView irc;
-    @Bind(R.id.loadedTip)
+    @BindView(R.id.loadedTip)
     LoadingTip loadedTip;
     private NewListAdapter newListAdapter;
     private List<NewsSummary> datas = new ArrayList<>();

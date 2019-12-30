@@ -22,6 +22,7 @@ import com.jaydenxiao.common.daynightmodeutils.ChangeModeController;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 基类
@@ -65,14 +66,16 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     public RxManager mRxManager;
     private boolean isConfigChange=false;
 
-        @Override
+    private Unbinder unbinder;
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isConfigChange=false;
         mRxManager=new RxManager();
         doBeforeSetcontentView();
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         mContext = this;
         mPresenter = TUtil.getT(this, 0);
         mModel=TUtil.getT(this,1);
@@ -278,7 +281,8 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         if(!isConfigChange){
             AppManager.getAppManager().finishActivity(this);
         }
-        ButterKnife.unbind(this);
-
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 }
