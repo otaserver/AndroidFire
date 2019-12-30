@@ -16,6 +16,7 @@
  */
 package com.jaydenxiao.androidfire.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,7 +52,17 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
                                int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
         if (dyConsumed > 0 && child.getVisibility() == View.VISIBLE) {
-            child.hide();
+//            child.hide();
+            // android material的bug。组件下滑feb消失后，再向上滑动，组件没有显示出来
+            // 问题追踪: https://issuetracker.google.com/issues/37130108
+            child.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onHidden(FloatingActionButton fab) {
+                    super.onHidden(fab);
+                    fab.setVisibility(View.INVISIBLE);
+                }
+            });
             RxBus.getInstance().post(AppConstant.MENU_SHOW_HIDE,false);
         } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
             RxBus.getInstance().post(AppConstant.MENU_SHOW_HIDE,true);
