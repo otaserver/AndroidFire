@@ -4,9 +4,11 @@ package com.jaydenxiao.androidfire.api;
 import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.webkit.WebSettings;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jaydenxiao.androidfire.app.AppApplication;
 import com.jaydenxiao.common.baseapp.BaseApplication;
 import com.jaydenxiao.common.commonutils.NetWorkUtils;
 
@@ -88,6 +90,10 @@ public class Api {
             public Response intercept(Chain chain) throws IOException {
                 Request build = chain.request().newBuilder()
                         .addHeader("Content-Type", "application/json")
+                        // 移除旧的
+                        .removeHeader("User-Agent")
+                        // 添加真正的头部。用于适配“视频”模块中，第三方api的访问。否则会报403 forbidden
+                        .addHeader("User-Agent", WebSettings.getDefaultUserAgent(AppApplication.getAppContext()))
                         .build();
                 return chain.proceed(build);
             }
