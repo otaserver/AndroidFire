@@ -1,3 +1,10 @@
+## TODO
+- 升级glide到4.x【完成】
+- 升级retrofit和rxjava
+- 统一使用封装的ImageLoaderUtils显示图片，找出代码片段中的GlideApp.with
+
+---
+
 AndroidFire，一款新闻阅读 App框架，基于 Material Design + MVP + RxJava + Retrofit + Glide，基本涵盖了当前 Android 端开发最常用的主流框架，基于此框架可以快速开发一个app。
 
 [安装地址](http://fir.im/androidFire)

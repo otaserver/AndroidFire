@@ -1,5 +1,6 @@
 package com.jaydenxiao.androidfire.ui.main.fragment;
 
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.jaydenxiao.androidfire.ui.news.presenter.PhotosListPresenter;
 import com.jaydenxiao.common.base.BaseFragment;
 import com.jaydenxiao.common.commonwidget.LoadingTip;
 import com.jaydenxiao.common.commonwidget.NormalTitleBar;
+import com.jaydenxiao.common.image.GlideApp;
 
 import java.util.List;
 
@@ -64,12 +66,12 @@ public class PhotosMainFragment extends BaseFragment<PhotosListPresenter,PhotosL
             @Override
             public void convert(ViewHolderHelper helper,final PhotoGirl photoGirl) {
                 ImageView imageView=helper.getView(R.id.iv_photo);
-                Glide.with(mContext).load(photoGirl.getUrl())
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                GlideApp.with(mContext).load(photoGirl.getUrl())
+                        .diskCacheStrategy(DiskCacheStrategy.DATA)
                         .placeholder(com.jaydenxiao.common.R.drawable.ic_image_loading)
                         .error(com.jaydenxiao.common.R.drawable.ic_empty_picture)
                         .centerCrop().override(1090, 1090*3/4)
-                        .crossFade().into(imageView);
+                        .transition(new DrawableTransitionOptions().crossFade(2000)).into(imageView);
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override

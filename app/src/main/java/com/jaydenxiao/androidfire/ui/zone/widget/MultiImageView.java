@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.common.commonutils.DisplayUtil;
-import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 
 import java.util.List;
 

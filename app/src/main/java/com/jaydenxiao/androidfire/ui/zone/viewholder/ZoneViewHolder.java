@@ -28,7 +28,7 @@ import com.jaydenxiao.androidfire.ui.zone.widget.ExpandableTextView;
 import com.jaydenxiao.androidfire.ui.zone.widget.FavortListView;
 import com.jaydenxiao.androidfire.ui.zone.widget.MultiImageView;
 import com.jaydenxiao.common.baseapp.AppCache;
-import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 import com.jaydenxiao.common.commonutils.TimeUtil;
 import com.jaydenxiao.common.commonutils.ToastUitl;
 import com.jaydenxiao.common.imagePager.BigImagePagerActivity;

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jaydenxiao.common.R;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 
 /*
 *

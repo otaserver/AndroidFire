@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.androidfire.ui.zone.DatasUtil;
 import com.jaydenxiao.common.commonutils.FormatUtil;
-import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 import com.jaydenxiao.common.commonwidget.WaveView;
 
 /**

@@ -9,7 +9,7 @@ import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.androidfire.ui.news.activity.AboutActivity;
 import com.jaydenxiao.androidfire.ui.zone.activity.CircleZoneActivity;
 import com.jaydenxiao.common.base.BaseFragment;
-import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 import com.jaydenxiao.common.commonwidget.WaveView;
 import com.jaydenxiao.common.daynightmodeutils.ChangeModeController;
 

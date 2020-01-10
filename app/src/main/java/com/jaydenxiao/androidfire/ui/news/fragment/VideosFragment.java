@@ -14,6 +14,7 @@ import com.aspsine.irecyclerview.universaladapter.recyclerview.CommonRecycleView
 import com.aspsine.irecyclerview.widget.LoadMoreFooterView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.jaydenxiao.androidfire.R;
 import com.jaydenxiao.androidfire.app.AppConstant;
 import com.jaydenxiao.androidfire.bean.VideoData;
@@ -22,6 +23,7 @@ import com.jaydenxiao.androidfire.ui.news.model.VideosListModel;
 import com.jaydenxiao.androidfire.ui.news.presenter.VideoListPresenter;
 import com.jaydenxiao.common.base.BaseFragment;
 import com.jaydenxiao.common.commonwidget.LoadingTip;
+import com.jaydenxiao.common.image.GlideApp;
 
 import java.util.List;
 
@@ -71,11 +73,11 @@ public class VideosFragment extends BaseFragment<VideoListPresenter, VideosListM
                         videoData.getMp4_url(), JCVideoPlayer.SCREEN_LAYOUT_LIST,
                         TextUtils.isEmpty(videoData.getDescription())?videoData.getTitle()+"":videoData.getDescription());
                 if (setUp) {
-                    Glide.with(mContext).load(videoData.getCover())
+                    GlideApp.with(mContext).load(videoData.getCover())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .centerCrop()
                             .error(com.jaydenxiao.common.R.drawable.ic_empty_picture)
-                            .crossFade().into(jcVideoPlayerStandard.thumbImageView);
+                            .transition(new DrawableTransitionOptions().crossFade(2000)).into(jcVideoPlayerStandard.thumbImageView);
                 }
             }
         };

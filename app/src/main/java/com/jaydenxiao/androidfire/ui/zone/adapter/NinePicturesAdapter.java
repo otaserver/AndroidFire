@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.aspsine.irecyclerview.baseadapter.BaseAblistViewAdapter;
 import com.jaydenxiao.androidfire.R;
-import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 import com.jaydenxiao.common.commonutils.ViewHolderUtil;
 import com.jaydenxiao.common.imagePager.BigImagePagerActivity;
 

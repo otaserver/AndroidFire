@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jaydenxiao.androidfire.R;
@@ -23,6 +24,7 @@ import com.jaydenxiao.androidfire.utils.MyUtils;
 import com.jaydenxiao.androidfire.utils.SystemUiVisibilityUtil;
 import com.jaydenxiao.androidfire.widget.PullBackLayout;
 import com.jaydenxiao.common.commonwidget.StatusBarCompat;
+import com.jaydenxiao.common.image.GlideApp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,10 +103,10 @@ public class PhotosDetailActivity extends AppCompatActivity implements PullBackL
 
     private void loadPhotoIv() {
         String url = getIntent().getStringExtra(AppConstant.PHOTO_DETAIL);
-        Glide.with(this).load(url)
+        GlideApp.with(this).load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(com.jaydenxiao.common.R.drawable.ic_empty_picture)
-                .crossFade().into(photoTouchIv);
+                .transition(new DrawableTransitionOptions().crossFade(2000)).into(photoTouchIv);
     }
 
     private void setPhotoViewClickEvent() {

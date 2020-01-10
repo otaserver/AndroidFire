@@ -15,7 +15,7 @@ import com.jaydenxiao.androidfire.ui.zone.adapter.NinePicturesAdapter;
 import com.jaydenxiao.androidfire.ui.zone.bean.CircleItem;
 import com.jaydenxiao.common.base.BaseActivity;
 import com.jaydenxiao.common.baseapp.AppCache;
-import com.jaydenxiao.common.commonutils.ImageLoaderUtils;
+import com.jaydenxiao.common.image.ImageLoaderUtils;
 import com.jaydenxiao.common.commonutils.ToastUitl;
 import com.jaydenxiao.common.commonwidget.NoScrollGridView;
 import com.jaydenxiao.common.commonwidget.NormalTitleBar;

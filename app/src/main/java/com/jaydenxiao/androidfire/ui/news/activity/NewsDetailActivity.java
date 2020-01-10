@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +33,7 @@ import com.jaydenxiao.androidfire.widget.URLImageGetter;
 import com.jaydenxiao.common.base.BaseActivity;
 import com.jaydenxiao.common.baserx.RxSchedulers;
 import com.jaydenxiao.common.commonutils.TimeUtil;
+import com.jaydenxiao.common.image.GlideApp;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -180,10 +183,10 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter, NewsDe
     }
 
     private void setNewsDetailPhotoIv(String imgSrc) {
-        Glide.with(this).load(imgSrc)
+        GlideApp.with(this).load(imgSrc)
                 .fitCenter()
                 .error(com.jaydenxiao.common.R.drawable.ic_empty_picture)
-                .crossFade().into(newsDetailPhotoIv);
+                .transition(new DrawableTransitionOptions().crossFade(2000)).into(newsDetailPhotoIv);
     }
 
     private void setNewsDetailBodyTv(final NewsDetail newsDetail, final String newsBody) {
