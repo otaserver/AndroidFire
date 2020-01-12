@@ -2,6 +2,7 @@
 - 升级glide到4.x【完成】
 - 升级retrofit和rxjava
 - 统一使用封装的ImageLoaderUtils显示图片，找出代码片段中的GlideApp.with
+- 加入androidutilcode工具类，替换掉代码中的重复工具类
 
 ---
 

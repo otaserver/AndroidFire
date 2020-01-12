@@ -5,7 +5,8 @@ import com.jaydenxiao.common.base.BaseModel;
 import com.jaydenxiao.common.base.BasePresenter;
 import com.jaydenxiao.common.base.BaseView;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 /**
  * des:新闻详情contract
@@ -15,7 +16,7 @@ import rx.Observable;
 public interface NewsDetailContract {
     interface Model extends BaseModel {
         //请求获取新闻
-        Observable <NewsDetail> getOneNewsData(String postId);
+        Observable<NewsDetail> getOneNewsData(String postId);
     }
 
     interface View extends BaseView {

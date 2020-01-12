@@ -6,6 +6,8 @@ import com.jaydenxiao.androidfire.ui.news.contract.NewsDetailContract;
 import com.jaydenxiao.common.baserx.RxSubscriber;
 import com.jaydenxiao.common.commonutils.ToastUitl;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * des:新闻详情
  * Created by xsf
@@ -14,7 +16,12 @@ import com.jaydenxiao.common.commonutils.ToastUitl;
 public class NewsDetailPresenter extends NewsDetailContract.Presenter{
     @Override
     public void getOneNewsDataRequest(String postId) {
-        mRxManage.add(mModel.getOneNewsData(postId).subscribe(new RxSubscriber<NewsDetail>(mContext) {
+        mModel.getOneNewsData(postId).subscribe(new RxSubscriber<NewsDetail>(mContext) {
+            @Override
+            protected void _onSubscribe(Disposable d) {
+                mRxManage.add(d);
+            }
+
             @Override
             protected void _onNext(NewsDetail newsDetail) {
             mView.returnOneNewsData(newsDetail);
@@ -24,6 +31,6 @@ public class NewsDetailPresenter extends NewsDetailContract.Presenter{
             protected void _onError(String message) {
                 ToastUitl.showToastWithImg(message, R.drawable.ic_wrong);
             }
-        }));
+        });
     }
 }

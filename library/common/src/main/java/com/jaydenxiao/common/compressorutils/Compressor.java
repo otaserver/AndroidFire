@@ -5,9 +5,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import java.io.File;
+import java.util.concurrent.Callable;
 
-import rx.Observable;
-import rx.functions.Func0;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 
 /**
  * 压缩图片类
@@ -79,19 +80,39 @@ public class Compressor {
         return ImageUtil.getScaledBitmap(context, Uri.fromFile(file), maxWidth, maxHeight);
     }
 
+    /**
+     * TODO ZJH 待测试
+     */
     public Observable<File> compressToFileAsObservable(final File file) {
-        return Observable.defer(new Func0<Observable<File>>() {
+//        return Observable.defer(new Func0<Observable<File>>() {
+//            @Override
+//            public Observable<File> call() {
+//                return Observable.just(compressToFile(file));
+//            }
+//        });
+
+        return Observable.defer(new Callable<ObservableSource<? extends File>>() {
             @Override
-            public Observable<File> call() {
+            public ObservableSource<? extends File> call() {
                 return Observable.just(compressToFile(file));
             }
         });
     }
 
+    /**
+     * TODO ZJH 待测试
+     */
     public Observable<Bitmap> compressToBitmapAsObservable(final File file) {
-        return Observable.defer(new Func0<Observable<Bitmap>>() {
+//        return Observable.defer(new Func0<Observable<Bitmap>>() {
+//            @Override
+//            public Observable<Bitmap> call() {
+//                return Observable.just(compressToBitmap(file));
+//            }
+//        });
+
+       return Observable.defer(new Callable<ObservableSource<? extends Bitmap>>() {
             @Override
-            public Observable<Bitmap> call() {
+            public ObservableSource<? extends Bitmap> call() {
                 return Observable.just(compressToBitmap(file));
             }
         });

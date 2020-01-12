@@ -6,11 +6,12 @@ import com.jaydenxiao.common.commonutils.ACache;
 
 import java.io.Serializable;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * des:处理服务器数据的缓存
@@ -28,7 +29,7 @@ Observable<LoginData> fromNetwork = Api.getDefault()
 @Override
 protected void _onNext(LoginData data) {
         showToast(R.string.login_success);
-        //TODO login success
+
         }
 
 @Override
@@ -55,36 +56,38 @@ public class RxCache {
                                          final int expireTime,
                                          Observable<T> fromNetwork,
                                          boolean forceRefresh) {
-        Observable<T> fromCache = Observable.create(new Observable.OnSubscribe<T>() {
+        Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
             @Override
-            public void call(Subscriber<? super T> subscriber) {
+            public void subscribe(ObservableEmitter<T> emitter) throws Exception {
                 //获取缓存
                 T cache = (T) ACache.get(context).getAsObject(cacheKey);
                 if (cache != null) {
-                    subscriber.onNext(cache);
+                    emitter.onNext(cache);
                 } else {
-                    subscriber.onCompleted();
+                    emitter.onComplete();
                 }
             }
+
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
         /**
          * 这里的fromNetwork 不需要指定Schedule,在handleRequest中已经变换了
          */
-        fromNetwork = fromNetwork.map(new Func1<T, T>() {
+        fromNetwork = fromNetwork.map(new Function<T, T>() {
             @Override
-            public T call(T result) {
+            public T apply(T t) throws Exception {
                 //保存缓存
-                ACache.get(context).put(cacheKey, (Serializable) result, expireTime);
-                return result;
+                ACache.get(context).put(cacheKey, (Serializable) t, expireTime);
+                return t;
             }
         });
-        //强制刷新则返回接口数据
+        // 强制刷新则返回接口数据
         if (forceRefresh) {
             return fromNetwork;
         } else {
-            //优先返回缓存
-            return Observable.concat(fromCache, fromNetwork).first();
+            // 优先返回缓存
+            // TODO ZJH 待测试
+            return Observable.concat(fromCache, fromNetwork).firstElement().toObservable();
         }
     }
 }

@@ -8,7 +8,8 @@ import com.jaydenxiao.common.R;
 import com.jaydenxiao.common.commonutils.NetWorkUtils;
 import com.jaydenxiao.common.commonwidget.LoadingDialog;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * des:订阅封装
@@ -28,7 +29,7 @@ public void _onNext(User user) {
 public void _onError(String msg) {
         ToastUtil.showShort(mActivity, msg);
         });*/
-public abstract class RxSubscriber<T> extends Subscriber<T> {
+public abstract class RxSubscriber<T> implements Observer<T> {
 
     private Context mContext;
     private String msg;
@@ -57,13 +58,13 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         if (showDialog)
             LoadingDialog.cancelDialogForLoading();
     }
+
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onSubscribe(Disposable d) {
         if (showDialog) {
             try {
                 LoadingDialog.showDialogForLoading((Activity) mContext,msg,true);
@@ -96,6 +97,8 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
             _onError(BaseApplication.getAppContext().getString(R.string.net_error));
         }
     }
+
+    protected abstract void _onSubscribe(Disposable d);
 
     protected abstract void _onNext(T t);
 
