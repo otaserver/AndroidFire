@@ -33,12 +33,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * @author 咖枯
@@ -51,7 +51,7 @@ public class URLImageGetter implements Html.ImageGetter {
     private int mPicCount;
     private int mPicTotal;
     private static final String mFilePath = AppApplication.getAppContext().getCacheDir().getAbsolutePath();
-    public Subscription mSubscription;
+    public Disposable mSubscription;
 
     public URLImageGetter(TextView textView, String newsBody, int picTotal) {
         mTextView = textView;
@@ -92,23 +92,28 @@ public class URLImageGetter implements Html.ImageGetter {
 
     @NonNull
     private Drawable getDrawableFromNet(final String source) {
-        mSubscription = Api.getDefault(HostType.NEWS_DETAIL_HTML_PHOTO)
+        Api.getDefault(HostType.NEWS_DETAIL_HTML_PHOTO)
                 .getNewsBodyHtmlPhoto(Api.getCacheControl(),source)
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<ResponseBody, Boolean>() {
+                .map(new Function<ResponseBody, Boolean>() {
                     @Override
-                    public Boolean call(ResponseBody response) {
+                    public Boolean apply(ResponseBody response) {
                         return WritePicToDisk(response, source);
                     }
-                }).subscribe(new Subscriber<Boolean>() {
+                }).subscribe(new Observer<Boolean>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mSubscription = d;
                     }
 
                     @Override

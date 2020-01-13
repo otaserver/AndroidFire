@@ -7,7 +7,8 @@ import com.jaydenxiao.common.baserx.RxSubscriber;
 
 import java.util.List;
 
-import rx.functions.Action1;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:
@@ -20,10 +21,10 @@ public class NewsMainPresenter extends NewsMainContract.Presenter{
     public void onStart() {
         super.onStart();
         //监听新闻频道变化刷新
-        mRxManage.on(AppConstant.NEWS_CHANNEL_CHANGED, new Action1<List<NewsChannelTable>>() {
+        mRxManage.on(AppConstant.NEWS_CHANNEL_CHANGED, new Consumer<List<NewsChannelTable>>() {
 
             @Override
-            public void call(List<NewsChannelTable> newsChannelTables) {
+            public void accept(List<NewsChannelTable> newsChannelTables) {
                 if(newsChannelTables!=null){
                     mView.returnMineNewsChannels(newsChannelTables);
                 }
@@ -33,7 +34,12 @@ public class NewsMainPresenter extends NewsMainContract.Presenter{
 
     @Override
     public void lodeMineChannelsRequest() {
-        mRxManage.add(mModel.lodeMineNewsChannels().subscribe(new RxSubscriber<List<NewsChannelTable>>(mContext,false) {
+        mModel.lodeMineNewsChannels().subscribe(new RxSubscriber<List<NewsChannelTable>>(mContext,false) {
+            @Override
+            protected void _onSubscribe(Disposable d) {
+                mRxManage.add(d);
+            }
+
             @Override
             protected void _onNext(List<NewsChannelTable> newsChannelTables) {
                 mView.returnMineNewsChannels(newsChannelTables);
@@ -43,6 +49,6 @@ public class NewsMainPresenter extends NewsMainContract.Presenter{
             protected void _onError(String message) {
 
             }
-        }));
+        });
     }
 }

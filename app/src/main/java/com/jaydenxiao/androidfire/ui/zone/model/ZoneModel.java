@@ -8,8 +8,11 @@ import com.jaydenxiao.common.baseapp.AppCache;
 import com.jaydenxiao.common.baserx.RxSchedulers;
 import com.jaydenxiao.common.commonutils.LogUtils;
 
-import rx.Observable;
-import rx.Subscriber;
+import org.reactivestreams.Subscriber;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 /**
  * des:
@@ -23,11 +26,11 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<String> getZoneNotReadNews() {
-        return Observable.create(new Observable.OnSubscribe<String>() {
+        return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext(AppCache.getInstance().getIcon());
-                subscriber.onCompleted();
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                e.onNext(AppCache.getInstance().getIcon());
+                e.onComplete();
                 LogUtils.logd(AppCache.getInstance().getIcon());
             }
         }).compose(RxSchedulers.<String>io_main());
@@ -43,14 +46,15 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<Result> getListDatas(String type, String userId, int page, int rows) {
-        return Observable.create(new Observable.OnSubscribe<Result>() {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void call(Subscriber<? super Result> subscriber) {
+            public void subscribe(ObservableEmitter<Result> e) throws Exception {
                 Result result = DatasUtil.getZoneListDatas();
-                subscriber.onNext(result);
-                subscriber.onCompleted();
+                e.onNext(result);
+                e.onComplete();
                 LogUtils.logd("result"+result.toString());
             }
+
         }).compose(RxSchedulers.<Result>io_main());
     }
 
@@ -62,12 +66,12 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<Result> deleteCircle(String circleId, int position) {
-        return Observable.create(new Observable.OnSubscribe<Result>() {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void call(Subscriber<? super Result> subscriber) {
+            public void subscribe(ObservableEmitter<Result> e) throws Exception {
                 Result result = new Result();
-                subscriber.onNext(result);
-                subscriber.onCompleted();
+                e.onNext(result);
+                e.onComplete();
                 LogUtils.logd(result.toString());
             }
         }).compose(RxSchedulers.<Result>io_main());
@@ -81,12 +85,12 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<Result> addFavort(String publishId, String publishUserId) {
-        return Observable.create(new Observable.OnSubscribe<Result>() {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void call(Subscriber<? super Result> subscriber) {
+            public void subscribe(ObservableEmitter<Result> e) throws Exception {
                 Result result = new Result();
-                subscriber.onNext(result);
-                subscriber.onCompleted();
+                e.onNext(result);
+                e.onComplete();
                 LogUtils.logd(result.toString());
             }
         }).compose(RxSchedulers.<Result>io_main());
@@ -100,12 +104,12 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<Result> deleteFavort(String publishId, String publishUserId) {
-        return Observable.create(new Observable.OnSubscribe<Result>() {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void call(Subscriber<? super Result> subscriber) {
+            public void subscribe(ObservableEmitter<Result> e) throws Exception {
                 Result result = new Result();
-                subscriber.onNext(result);
-                subscriber.onCompleted();
+                e.onNext(result);
+                e.onComplete();
                 LogUtils.logd(result.toString());
             }
         }).compose(RxSchedulers.<Result>io_main());
@@ -119,12 +123,12 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<Result> addComment(String publishUserId, CommentItem circleItem) {
-        return Observable.create(new Observable.OnSubscribe<Result>() {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void call(Subscriber<? super Result> subscriber) {
+            public void subscribe(ObservableEmitter<Result> e) throws Exception {
                 Result result = new Result();
-                subscriber.onNext(result);
-                subscriber.onCompleted();
+                e.onNext(result);
+                e.onComplete();
                 LogUtils.logd(result.toString());
             }
         }).compose(RxSchedulers.<Result>io_main());
@@ -137,12 +141,12 @@ public class ZoneModel implements CircleZoneContract.Model {
      */
     @Override
     public Observable<Result> deleteComment(String commentId) {
-        return Observable.create(new Observable.OnSubscribe<Result>() {
+        return Observable.create(new ObservableOnSubscribe<Result>() {
             @Override
-            public void call(Subscriber<? super Result> subscriber) {
+            public void subscribe(ObservableEmitter<Result> e) throws Exception {
                 Result result = new Result();
-                subscriber.onNext(result);
-                subscriber.onCompleted();
+                e.onNext(result);
+                e.onComplete();
                 LogUtils.logd(result.toString());
             }
         }).compose(RxSchedulers.<Result>io_main());

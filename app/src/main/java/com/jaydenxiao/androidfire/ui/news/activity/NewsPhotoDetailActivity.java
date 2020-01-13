@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:图文详情
@@ -82,10 +82,10 @@ public class NewsPhotoDetailActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         //监听图片tab点击
-        mRxManager.on(AppConstant.PHOTO_TAB_CLICK, new Action1<Object>() {
+        mRxManager.on(AppConstant.PHOTO_TAB_CLICK, new Consumer<Object>() {
 
             @Override
-            public void call(Object o) {
+            public void accept(Object o) {
                 if (photoDetailTitleTv.getVisibility() == View.VISIBLE) {
                     startAnimation(View.GONE, 0.9f, 0.5f);
                 } else {

@@ -39,8 +39,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * des:普通新闻详情
@@ -190,11 +191,11 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter, NewsDe
     }
 
     private void setNewsDetailBodyTv(final NewsDetail newsDetail, final String newsBody) {
-        mRxManager.add(Observable.timer(500, TimeUnit.MILLISECONDS)
+        Observable.timer(500, TimeUnit.MILLISECONDS)
                 .compose(RxSchedulers.<Long>io_main())
-                .subscribe(new Subscriber<Long>() {
+                .subscribe(new Observer<Long>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         progressBar.setVisibility(View.GONE);
                         fab.setVisibility(View.VISIBLE);
                     }
@@ -205,10 +206,15 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter, NewsDe
                     }
 
                     @Override
+                    public void onSubscribe(Disposable d) {
+                        mRxManager.add(d);
+                    }
+
+                    @Override
                     public void onNext(Long aLong) {
                         setBody(newsDetail, newsBody);
                     }
-                }));
+                });
     }
 
     private void setBody(NewsDetail newsDetail, String newsBody) {

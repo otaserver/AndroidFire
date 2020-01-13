@@ -11,8 +11,9 @@ import com.jaydenxiao.common.commonutils.ACache;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 /**
  * des:
@@ -23,16 +24,16 @@ public class NewsMainModel implements NewsMainContract.Model {
     @Override
     public Observable<List<NewsChannelTable>> lodeMineNewsChannels() {
 
-        return Observable.create(new Observable.OnSubscribe<List<NewsChannelTable>>() {
+        return Observable.create(new ObservableOnSubscribe<List<NewsChannelTable>>() {
             @Override
-            public void call(Subscriber<? super List<NewsChannelTable>> subscriber) {
+            public void subscribe(ObservableEmitter<List<NewsChannelTable>> e) throws Exception {
                 ArrayList<NewsChannelTable> newsChannelTableList = (ArrayList<NewsChannelTable>) ACache.get(AppApplication.getAppContext()).getAsObject(AppConstant.CHANNEL_MINE);
-               if(newsChannelTableList==null){
-                   newsChannelTableList= (ArrayList<NewsChannelTable>) NewsChannelTableManager.loadNewsChannelsStatic();
-                   ACache.get(AppApplication.getAppContext()).put(AppConstant.CHANNEL_MINE,newsChannelTableList);
-               }
-                subscriber.onNext(newsChannelTableList);
-                subscriber.onCompleted();
+                if(newsChannelTableList==null){
+                    newsChannelTableList= (ArrayList<NewsChannelTable>) NewsChannelTableManager.loadNewsChannelsStatic();
+                    ACache.get(AppApplication.getAppContext()).put(AppConstant.CHANNEL_MINE,newsChannelTableList);
+                }
+                e.onNext(newsChannelTableList);
+                e.onComplete();
             }
         }).compose(RxSchedulers.<List<NewsChannelTable>>io_main());
     }

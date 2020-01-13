@@ -7,7 +7,7 @@ import com.jaydenxiao.common.base.BaseView;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * des:图片列表contract
@@ -17,7 +17,7 @@ import rx.Observable;
 public interface PhotoListContract {
     interface Model extends BaseModel {
         //请求获取图片
-        Observable <List<PhotoGirl>> getPhotosListData(int size, int page);
+        Observable<List<PhotoGirl>> getPhotosListData(int size, int page);
     }
 
     interface View extends BaseView {

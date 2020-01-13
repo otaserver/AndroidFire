@@ -8,7 +8,8 @@ import com.jaydenxiao.common.baserx.RxSubscriber;
 
 import java.util.List;
 
-import rx.functions.Action1;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:
@@ -21,9 +22,9 @@ public class NewsListPresenter extends NewsListContract.Presenter {
     public void onStart() {
         super.onStart();
         //监听返回顶部动作
-       mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Action1<Object>() {
+       mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Consumer<Object>() {
            @Override
-           public void call(Object o) {
+           public void accept(Object o) {
             mView.scrolltoTop();
            }
        });
@@ -37,10 +38,11 @@ public class NewsListPresenter extends NewsListContract.Presenter {
      */
     @Override
     public void getNewsListDataRequest(String type, String id, int startPage) {
-         mRxManage.add(mModel.getNewsListData(type,id,startPage).subscribe(new RxSubscriber<List<NewsSummary>>(mContext,false) {
+         mModel.getNewsListData(type,id,startPage).subscribe(new RxSubscriber<List<NewsSummary>>(mContext,false) {
+
              @Override
-             public void onStart() {
-                 super.onStart();
+             protected void _onSubscribe(Disposable d) {
+                 mRxManage.add(d);
                  mView.showLoading(mContext.getString(R.string.loading));
              }
 
@@ -54,6 +56,6 @@ public class NewsListPresenter extends NewsListContract.Presenter {
              protected void _onError(String message) {
                  mView.showErrorTip(message);
              }
-         }));
+         });
     }
 }

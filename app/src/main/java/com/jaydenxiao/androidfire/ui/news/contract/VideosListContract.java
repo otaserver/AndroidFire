@@ -7,7 +7,7 @@ import com.jaydenxiao.common.base.BaseView;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * des:视频列表contract
@@ -17,7 +17,7 @@ import rx.Observable;
 public interface VideosListContract {
     interface Model extends BaseModel {
         //请求获取视频
-        Observable <List<VideoData>> getVideosListData(String type, int startPage);
+        Observable<List<VideoData>> getVideosListData(String type, int startPage);
     }
 
     interface View extends BaseView {

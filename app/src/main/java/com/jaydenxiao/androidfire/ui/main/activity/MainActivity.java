@@ -31,7 +31,7 @@ import butterknife.BindView;
 import cn.hugeterry.updatefun.UpdateFunGO;
 import cn.hugeterry.updatefun.config.UpdateKey;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:主界面
@@ -96,10 +96,10 @@ public class MainActivity extends BaseActivity {
         tabLayout.measure(0,0);
         tabLayoutHeight=tabLayout.getMeasuredHeight();
         //监听菜单显示或隐藏
-        mRxManager.on(AppConstant.MENU_SHOW_HIDE, new Action1<Boolean>() {
+        mRxManager.on(AppConstant.MENU_SHOW_HIDE, new Consumer<Boolean>() {
 
             @Override
-            public void call(Boolean hideOrShow) {
+            public void accept(Boolean hideOrShow) {
                 startAnimation(hideOrShow);
             }
         });

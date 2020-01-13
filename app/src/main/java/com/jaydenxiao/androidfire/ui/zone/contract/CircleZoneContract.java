@@ -13,7 +13,7 @@ import com.jaydenxiao.common.base.BaseView;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * des:朋友圈契约接口

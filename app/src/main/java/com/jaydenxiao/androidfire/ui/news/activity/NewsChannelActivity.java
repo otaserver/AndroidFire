@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:选择关注频道
@@ -62,9 +62,9 @@ public class NewsChannelActivity extends BaseActivity<NewsChanelPresenter, NewsC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRxManager.on(AppConstant.CHANNEL_SWAP, new Action1<ChannelItemMoveEvent>() {
+        mRxManager.on(AppConstant.CHANNEL_SWAP, new Consumer<ChannelItemMoveEvent>() {
             @Override
-            public void call(ChannelItemMoveEvent channelItemMoveEvent) {
+            public void accept(ChannelItemMoveEvent channelItemMoveEvent) {
                 if (channelItemMoveEvent!=null) {
                     mPresenter.onItemSwap((ArrayList<NewsChannelTable>) channelAdapterMine.getAll(),channelItemMoveEvent.getFromPosition(),channelItemMoveEvent.getToPosition());
                 }

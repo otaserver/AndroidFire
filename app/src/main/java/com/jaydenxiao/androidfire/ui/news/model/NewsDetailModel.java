@@ -9,8 +9,8 @@ import com.jaydenxiao.common.baserx.RxSchedulers;
 import java.util.List;
 import java.util.Map;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 /**
  * des:新闻详情
@@ -22,9 +22,9 @@ public class NewsDetailModel implements NewsDetailContract.Model {
     @Override
     public Observable<NewsDetail> getOneNewsData(final String postId) {
         return Api.getDefault(HostType.NETEASE_NEWS_VIDEO).getNewDetail(Api.getCacheControl(),postId)
-                .map(new Func1<Map<String, NewsDetail>, NewsDetail>() {
+                .map(new Function<Map<String, NewsDetail>, NewsDetail>() {
                     @Override
-                    public NewsDetail call(Map<String, NewsDetail> map) {
+                    public NewsDetail apply(Map<String, NewsDetail> map) {
                         NewsDetail newsDetail = map.get(postId);
                         changeNewsDetail(newsDetail);
                         return newsDetail;

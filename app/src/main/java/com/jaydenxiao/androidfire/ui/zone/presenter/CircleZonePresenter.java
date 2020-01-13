@@ -24,8 +24,9 @@ import com.wevey.selector.dialog.MDAlertDialog;
 import java.util.List;
 import java.util.Random;
 
-import rx.Subscriber;
-import rx.functions.Action1;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:朋友圈presenter
@@ -44,9 +45,9 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
         super.onStart();
         LogUtils.logd("dfsdfsd");
         //新增说说监听
-        mRxManage.on(AppConstant.ZONE_PUBLISH_ADD, new Action1<CircleItem>() {
+        mRxManage.on(AppConstant.ZONE_PUBLISH_ADD, new Consumer<CircleItem>() {
             @Override
-            public void call(CircleItem circleItem) {
+            public void accept(CircleItem circleItem) {
                 if (circleItem != null) {
                     mView.setOnePublishData(circleItem);
                 }
@@ -59,9 +60,15 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      */
     @Override
     public void getNotReadNewsCount() {
-        mRxManage.add(mModel.getZoneNotReadNews().subscribe(new Subscriber<String>() {
+        mModel.getZoneNotReadNews().subscribe(new Observer<String>() {
             @Override
-            public void onCompleted() {
+            public void onSubscribe(Disposable d) {
+                mRxManage.add(d);
+            }
+
+            @Override
+            public void onNext(String icon) {
+                mView.updateNotReadNewsCount(10, icon);
             }
 
             @Override
@@ -70,10 +77,10 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             }
 
             @Override
-            public void onNext(String icon) {
-                mView.updateNotReadNewsCount(10, icon);
+            public void onComplete() {
+
             }
-        }));
+        });
     }
 
     /**
@@ -84,15 +91,20 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
         //加载更多不显示加载条
         if (page <= 1)
             mView.showLoading("加载中...");
-        mRxManage.add(mModel.getListDatas(type, userId, page, rows).subscribe(new Subscriber<Result>() {
+       mModel.getListDatas(type, userId, page, rows).subscribe(new Observer<Result>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mView.stopLoading();
             }
 
             @Override
             public void onError(Throwable e) {
                 mView.showErrorTip("" + e.getMessage());
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                mRxManage.add(d);
             }
 
             @Override
@@ -110,7 +122,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                     }
                 }
             }
-        }));
+        });
 
     }
 
@@ -147,9 +159,9 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                     public void clickRightButton(View view) {
                         mdAlertDialog.dismiss();
                         mView.startProgressDialog();
-                        mRxManage.add(mModel.deleteCircle(circleId, position).subscribe(new Subscriber<Result>() {
+                        mModel.deleteCircle(circleId, position).subscribe(new Observer<Result>() {
                             @Override
-                            public void onCompleted() {
+                            public void onComplete() {
                                 mView.stopProgressDialog();
                             }
 
@@ -160,10 +172,15 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                             }
 
                             @Override
+                            public void onSubscribe(Disposable d) {
+                                mRxManage.add(d);
+                            }
+
+                            @Override
                             public void onNext(Result result) {
                                 mView.update2DeleteCircle(circleId, position);
                             }
-                        }));
+                        });
                     }
                 })
                 .build();
@@ -179,15 +196,20 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
     @Override
     public void addFavort(final String publishId, final String publishUserId, final int circlePosition, final View view) {
         mView.startProgressDialog();
-        mRxManage.add(mModel.addFavort(publishId, publishUserId).subscribe(new Subscriber<Result>() {
+        mModel.addFavort(publishId, publishUserId).subscribe(new Observer<Result>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mView.stopProgressDialog();
             }
 
             @Override
             public void onError(Throwable e) {
                 ToastUitl.showToastWithImg(mContext.getString(R.string.net_error), R.drawable.ic_wrong);
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                mRxManage.add(d);
             }
 
             @Override
@@ -203,7 +225,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                     mView.update2AddFavorite(circlePosition, item);
                 }
             }
-        }));
+        });
     }
 
     /**
@@ -214,9 +236,9 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
     @Override
     public void deleteFavort(final String publishId, final String publishUserId, final int circlePosition) {
         mView.startProgressDialog();
-        mRxManage.add(mModel.deleteFavort(publishId, publishUserId).subscribe(new Subscriber<Result>() {
+        mModel.deleteFavort(publishId, publishUserId).subscribe(new Observer<Result>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mView.stopProgressDialog();
             }
 
@@ -226,12 +248,17 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             }
 
             @Override
+            public void onSubscribe(Disposable d) {
+                mRxManage.add(d);
+            }
+
+            @Override
             public void onNext(Result result) {
                 if (result != null) {
                     mView.update2DeleteFavort(circlePosition, AppCache.getInstance().getUserId());
                 }
             }
-        }));
+        });
     }
 
     /**
@@ -246,9 +273,9 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             return;
         }
         mView.startProgressDialog();
-        mRxManage.add(mModel.addComment(config.getPublishUserId(), new CommentItem(config.getName(), config.getId(), content, config.getPublishId(), AppCache.getInstance().getUserId(), "jayden")).subscribe(new Subscriber<Result>() {
+        mModel.addComment(config.getPublishUserId(), new CommentItem(config.getName(), config.getId(), content, config.getPublishId(), AppCache.getInstance().getUserId(), "jayden")).subscribe(new Observer<Result>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mView.stopProgressDialog();
             }
 
@@ -259,12 +286,17 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             }
 
             @Override
+            public void onSubscribe(Disposable d) {
+                mRxManage.add(d);
+            }
+
+            @Override
             public void onNext(Result result) {
                 if (result != null) {
                     mView.update2AddComment(config.circlePosition, new CommentItem(config.getName(), config.getId(), content, config.getPublishId(), AppCache.getInstance().getUserId(), "锋"));
                 }
             }
-        }));
+        });
     }
 
     /**
@@ -276,9 +308,9 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
     @Override
     public void deleteComment(final int circlePosition, final String commentId, final int commentPosition) {
         mView.startProgressDialog();
-        mRxManage.add(mModel.deleteComment(commentId).subscribe(new Subscriber<Result>() {
+        mModel.deleteComment(commentId).subscribe(new Observer<Result>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 mView.stopProgressDialog();
             }
 
@@ -289,10 +321,15 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             }
 
             @Override
+            public void onSubscribe(Disposable d) {
+                mRxManage.add(d);
+            }
+
+            @Override
             public void onNext(Result result) {
                 mView.update2DeleteComment(circlePosition, commentId, commentPosition);
             }
-        }));
+        });
     }
 
     /**

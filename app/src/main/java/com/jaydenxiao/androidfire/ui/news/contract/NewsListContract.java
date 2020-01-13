@@ -7,7 +7,7 @@ import com.jaydenxiao.common.base.BaseView;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * des:新闻列表contract
@@ -17,7 +17,7 @@ import rx.Observable;
 public interface NewsListContract {
     interface Model extends BaseModel {
         //请求获取新闻
-        Observable <List<NewsSummary>> getNewsListData(String type, final String id, int startPage);
+        Observable<List<NewsSummary>> getNewsListData(String type, final String id, int startPage);
     }
 
     interface View extends BaseView {

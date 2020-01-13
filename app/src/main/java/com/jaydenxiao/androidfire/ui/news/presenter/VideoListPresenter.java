@@ -8,7 +8,8 @@ import com.jaydenxiao.common.baserx.RxSubscriber;
 
 import java.util.List;
 
-import rx.functions.Action1;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * des:
@@ -21,9 +22,9 @@ public class VideoListPresenter extends VideosListContract.Presenter {
     public void onStart() {
         super.onStart();
         //监听返回顶部动作
-       mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Action1<Object>() {
+       mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Consumer<Object>() {
            @Override
-           public void call(Object o) {
+           public void accept(Object o) {
             mView.scrolltoTop();
            }
        });
@@ -36,12 +37,13 @@ public class VideoListPresenter extends VideosListContract.Presenter {
      */
     @Override
     public void getVideosListDataRequest(String type, int startPage) {
-        mRxManage.add(mModel.getVideosListData(type,startPage).subscribe(new RxSubscriber<List<VideoData>>(mContext,false) {
+        mModel.getVideosListData(type,startPage).subscribe(new RxSubscriber<List<VideoData>>(mContext,false) {
             @Override
-            public void onStart() {
-                super.onStart();
+            protected void _onSubscribe(Disposable d) {
+                mRxManage.add(d);
                 mView.showLoading(mContext.getString(R.string.loading));
             }
+
             @Override
             protected void _onNext(List<VideoData> videoDatas) {
                 mView.returnVideosListData(videoDatas);
@@ -52,6 +54,6 @@ public class VideoListPresenter extends VideosListContract.Presenter {
             protected void _onError(String message) {
                 mView.showErrorTip(message);
             }
-        }));
+        });
     }
 }

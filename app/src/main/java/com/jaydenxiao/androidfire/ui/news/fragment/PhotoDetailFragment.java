@@ -15,8 +15,9 @@ import com.jaydenxiao.common.image.ImageLoaderUtils;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * des:图文新闻详情
@@ -51,11 +52,11 @@ public class PhotoDetailFragment extends BaseFragment {
     }
 
     private void initPhotoView() {
-        mRxManager.add(Observable.timer(100, TimeUnit.MILLISECONDS) // 直接使用glide加载的话，activity切换动画时背景短暂为默认背景色
+        Observable.timer(100, TimeUnit.MILLISECONDS) // 直接使用glide加载的话，activity切换动画时背景短暂为默认背景色
                 .compose(RxSchedulers.<Long>io_main())
-                .subscribe(new Subscriber<Long>() {
+                .subscribe(new Observer<Long>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         progressBar.setVisibility(View.GONE);
                     }
 
@@ -65,10 +66,15 @@ public class PhotoDetailFragment extends BaseFragment {
                     }
 
                     @Override
+                    public void onSubscribe(Disposable d) {
+                        mRxManager.add(d);
+                    }
+
+                    @Override
                     public void onNext(Long aLong) {
                         ImageLoaderUtils.displayBigPhoto(getContext(),photoView,mImgSrc);
                     }
-                }));
+                });
     }
 
     private void setPhotoViewClickEvent() {
