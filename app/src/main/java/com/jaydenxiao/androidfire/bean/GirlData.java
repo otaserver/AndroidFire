@@ -19,22 +19,51 @@ package com.jaydenxiao.androidfire.bean;
 import java.util.List;
 
 public class GirlData {
-    private boolean isError;
-    private List<PhotoGirl> results;
+    private String status;
 
-    public boolean isError() {
-        return isError;
+    private int page;
+    private int pageCount;
+    private String totalCounts;
+
+    private List<PhotoGirl> data;
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setError(boolean error) {
-        isError = error;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setResults(List<PhotoGirl> results) {
-        this.results = results;
+    public int getPage() {
+        return page;
     }
 
-    public List<PhotoGirl> getResults() {
-        return results;
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public String getTotalCounts() {
+        return totalCounts;
+    }
+
+    public void setTotalCounts(String totalCounts) {
+        this.totalCounts = totalCounts;
+    }
+
+    public List<PhotoGirl> getData() {
+        return data;
+    }
+
+    public void setData(List<PhotoGirl> data) {
+        this.data = data;
     }
 }

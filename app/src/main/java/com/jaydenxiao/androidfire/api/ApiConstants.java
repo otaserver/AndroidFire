@@ -120,22 +120,10 @@ public class ApiConstants {
     public static final String WEATHER_HOST = "http://wthrcdn.etouch.cn/";
 
     /**
-     * 新浪图片新闻
-     * http://gank.io/api/data/福利/{size}/{page}
+     * gank.io的妹纸图片
+     * https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10
      */
-    public static final String SINA_PHOTO_HOST = "http://gank.io/api/";
-
-    // 精选列表
-    public static final String SINA_PHOTO_CHOICE_ID = "hdpic_toutiao";
-    // 趣图列表
-    public static final String SINA_PHOTO_FUN_ID = "hdpic_funny";
-    // 美图列表
-    public static final String SINA_PHOTO_PRETTY_ID = "hdpic_pretty";
-    // 故事列表
-    public static final String SINA_PHOTO_STORY_ID = "hdpic_story";
-
-    // 图片详情
-    public static final String SINA_PHOTO_DETAIL_ID = "hdpic_hdpic_toutiao_4";
+    public static final String GANK_IO_HOST = "https://gank.io/api/v2/";
 
     /**
      * 新闻id获取类型
@@ -168,7 +156,7 @@ public class ApiConstants {
                 host = NETEAST_HOST;
                 break;
             case HostType.GANK_GIRL_PHOTO:
-                host = SINA_PHOTO_HOST;
+                host = GANK_IO_HOST;
                 break;
             case HostType.NEWS_DETAIL_HTML_PHOTO:
                 host = "http://kaku.com/";

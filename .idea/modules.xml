@@ -3,11 +3,20 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidFire.iml" filepath="$PROJECT_DIR$/AndroidFire.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidFire-app.iml" filepath="$PROJECT_DIR$/app/AndroidFire-app.iml" group="AndroidFire/app" />
+      <module fileurl="file://$PROJECT_DIR$/library/AndroidFire-library.iml" filepath="$PROJECT_DIR$/library/AndroidFire-library.iml" group="AndroidFire/library" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/common/common.iml" filepath="$PROJECT_DIR$/library/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/github-AndroidFire.iml" filepath="$PROJECT_DIR$/github-AndroidFire.iml" group="AndroidFire" />
       <module fileurl="file://$PROJECT_DIR$/library/irecyclerview/irecyclerview.iml" filepath="$PROJECT_DIR$/library/irecyclerview/irecyclerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/jcvideoplayer/jcvideoplayer.iml" filepath="$PROJECT_DIR$/library/jcvideoplayer/jcvideoplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/common/library-common.iml" filepath="$PROJECT_DIR$/library/common/library-common.iml" group="AndroidFire/library/common" />
+      <module fileurl="file://$PROJECT_DIR$/library/irecyclerview/library-irecyclerview.iml" filepath="$PROJECT_DIR$/library/irecyclerview/library-irecyclerview.iml" group="AndroidFire/library/irecyclerview" />
+      <module fileurl="file://$PROJECT_DIR$/library/jcvideoplayer/library-jcvideoplayer.iml" filepath="$PROJECT_DIR$/library/jcvideoplayer/library-jcvideoplayer.iml" group="AndroidFire/library/jcvideoplayer" />
+      <module fileurl="file://$PROJECT_DIR$/library/oneKeyShareSDK/library-oneKeyShareSDK.iml" filepath="$PROJECT_DIR$/library/oneKeyShareSDK/library-oneKeyShareSDK.iml" group="AndroidFire/library/oneKeyShareSDK" />
+      <module fileurl="file://$PROJECT_DIR$/library/photoPicker/library-photoPicker.iml" filepath="$PROJECT_DIR$/library/photoPicker/library-photoPicker.iml" group="AndroidFire/library/photoPicker" />
+      <module fileurl="file://$PROJECT_DIR$/library/selectordialog/library-selectordialog.iml" filepath="$PROJECT_DIR$/library/selectordialog/library-selectordialog.iml" group="AndroidFire/library/selectordialog" />
       <module fileurl="file://$PROJECT_DIR$/library/oneKeyShareSDK/oneKeyShareSDK.iml" filepath="$PROJECT_DIR$/library/oneKeyShareSDK/oneKeyShareSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/photoPicker/photoPicker.iml" filepath="$PROJECT_DIR$/library/photoPicker/photoPicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/selectordialog/selectordialog.iml" filepath="$PROJECT_DIR$/library/selectordialog/selectordialog.iml" />

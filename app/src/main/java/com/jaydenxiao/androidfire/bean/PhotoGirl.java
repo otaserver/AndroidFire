@@ -16,28 +16,42 @@
  */
 package com.jaydenxiao.androidfire.bean;
 
+import java.util.List;
+
+/**
+ * {
+ *     "_id": "5e958fe40bd5529b54e712a6",
+ *     "author": "鸢媛",
+ *     "category": "Girl",
+ *     "createdAt": "2020-04-30 08:00:00",
+ *     "desc": "其实也不是什么忘不掉的人\n只是对那场无结果的付出和被浪费的炽热的爱\n耿耿于怀罢了",
+ *     "images": [
+ *         "http://gank.io/images/291ee91a554f4cd88bf9a09a9fa2e95e"
+ *     ],
+ *     "likeCounts": 0,
+ *     "publishedAt": "2020-04-30 08:00:00",
+ *     "stars": 1,
+ *     "title": "第71期",
+ *     "type": "Girl",
+ *     "url": "http://gank.io/images/291ee91a554f4cd88bf9a09a9fa2e95e",
+ *     "views": 43
+ * }
+ */
 public class PhotoGirl {
-    /**
-     * _id : 57a4056c421aa91e2606478d
-     * createdAt : 2016-08-05T11:18:04.807Z
-     * desc : 8.5
-     * publishedAt : 2016-08-05T11:31:58.293Z
-     * source : chrome
-     * type : 福利
-     * url : http://ww4.sinaimg.cn/large/610dc034jw1f6ipaai7wgj20dw0kugp4.jpg
-     * used : true
-     * who : 代码家
-     */
 
     private String _id;
+    private String author;
+    private String category;
     private String createdAt;
     private String desc;
+    private List<String> images;
+    private Integer likeCounts;
     private String publishedAt;
-    private String source;
+    private Integer stars;
+    private String title;
     private String type;
     private String url;
-    private boolean used;
-    private String who;
+    private Integer views;
 
     public String get_id() {
         return _id;
@@ -45,6 +59,22 @@ public class PhotoGirl {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getCreatedAt() {
@@ -63,6 +93,22 @@ public class PhotoGirl {
         this.desc = desc;
     }
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public Integer getLikeCounts() {
+        return likeCounts;
+    }
+
+    public void setLikeCounts(Integer likeCounts) {
+        this.likeCounts = likeCounts;
+    }
+
     public String getPublishedAt() {
         return publishedAt;
     }
@@ -71,12 +117,20 @@ public class PhotoGirl {
         this.publishedAt = publishedAt;
     }
 
-    public String getSource() {
-        return source;
+    public Integer getStars() {
+        return stars;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setStars(Integer stars) {
+        this.stars = stars;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getType() {
@@ -95,19 +149,11 @@ public class PhotoGirl {
         this.url = url;
     }
 
-    public boolean isUsed() {
-        return used;
+    public Integer getViews() {
+        return views;
     }
 
-    public void setUsed(boolean used) {
-        this.used = used;
-    }
-
-    public String getWho() {
-        return who;
-    }
-
-    public void setWho(String who) {
-        this.who = who;
+    public void setViews(Integer views) {
+        this.views = views;
     }
 }

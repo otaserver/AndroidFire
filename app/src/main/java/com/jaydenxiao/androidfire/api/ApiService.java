@@ -46,7 +46,8 @@ public interface ApiService {
     //@Url，它允许我们直接传入一个请求的URL。这样以来我们可以将上一个请求的获得的url直接传入进来，baseUrl将被无视
     // baseUrl 需要符合标准，为空、""、或不合法将会报错
 
-    @GET("data/福利/{size}/{page}")
+//    @GET("data/福利/{size}/{page}")
+    @GET("data/category/Girl/type/Girl/page/{page}/count/{size}")
     Observable<GirlData> getPhotoList(
             @Header("Cache-Control") String cacheControl,
             @Path("size") int size,

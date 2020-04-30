@@ -7,6 +7,7 @@ import com.jaydenxiao.androidfire.bean.PhotoGirl;
 import com.jaydenxiao.androidfire.ui.news.contract.PhotoListContract;
 import com.jaydenxiao.common.baserx.RxSchedulers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -25,7 +26,14 @@ public class PhotosListModel implements PhotoListContract.Model{
                 .map(new Function<GirlData, List<PhotoGirl>>() {
                     @Override
                     public List<PhotoGirl> apply(GirlData girlData) {
-                        return girlData.getResults();
+                        // rxjava2中，return null即返回错误onError
+                        List<PhotoGirl> result = null;
+                        if ("100".equals(girlData.getStatus())) {
+                            result = girlData.getData();
+                        } else {
+                            result = new ArrayList<>();
+                        }
+                        return result;
                     }
                 })
                 .compose(RxSchedulers.<List<PhotoGirl>>io_main());

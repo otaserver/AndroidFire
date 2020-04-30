@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jaydenxiao.androidfire.app.AppApplication;
 import com.jaydenxiao.common.baseapp.BaseApplication;
+import com.jaydenxiao.common.commonutils.LogUtils;
 import com.jaydenxiao.common.commonutils.NetWorkUtils;
 
 import java.io.File;
@@ -79,7 +80,13 @@ public class Api {
     //构造方法私有
     private Api(int hostType) {
         //开启Log
-        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                // 打印请求log
+                LogUtils.logd("Retrofit2 log message -> " + message);
+            }
+        });
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         //缓存
         File cacheFile = new File(BaseApplication.getAppContext().getCacheDir(), "cache");

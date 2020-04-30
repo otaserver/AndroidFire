@@ -1,8 +1,10 @@
 ## TODO
 - ~~升级glide到4.x【完成】~~
 - ~~升级retrofit和rxjava【完成】~~
+- 靓妹纸模块图片不显示的问题
 - 统一使用封装的ImageLoaderUtils显示图片，找出代码片段中的GlideApp.with
-- 加入androidutilcode工具类，替换掉代码中的重复工具类
+
+- 整合androidutilcode工具类，进行二次封装，用来替换掉项目中的工具类。如：LogUtils等
 
 ---
 
